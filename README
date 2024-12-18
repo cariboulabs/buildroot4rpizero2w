@@ -1,3 +1,10 @@
+Alon:
+make raspberrypizero2w_defconfig
+make linux-xconfig
+unset LD_LIBRARY_PATH
+make -j10 V=1
+
+#
 Buildroot is a simple, efficient and easy-to-use tool to generate embedded
 Linux systems through cross-compilation.
 
