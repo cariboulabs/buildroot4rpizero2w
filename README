@@ -1,8 +1,32 @@
-Alon:
-make raspberrypizero2w_defconfig
-make linux-xconfig
+# Alon
+```
+#so that things work...
 unset LD_LIBRARY_PATH
-make -j10 V=1
+
+# to customize the linux kernel
+make linux-xconfig #or make linux-menuconfig
+# copy generated output/build/linux-XYZ/.config to desired location
+
+make raspberrypizero2w_defconfig
+make -j10 V=1 #this can take sometime
+```
+
+scripts that should be ran at startup:
+
+`/board/raspberrypizero2w/rootfs_overlay/etc/init.d/S99ping_start.sh` 
+
+the S99 is a naming convetion with which the kernel decides the order of tasks
+
+
+sources:
+
+* https://stackoverflow.com/questions/1414968/how-do-i-configure-the-linux-kernel-within-buildroot
+
+* https://www.furkantokac.com/rpi3-fast-boot-less-than-2-seconds/
+
+* https://github.com/IronOxidizer/instant-pi
+
+* https://kittenlabs.de/blog/2024/09/01/extreme-pi-boot-optimization/
 
 #
 Buildroot is a simple, efficient and easy-to-use tool to generate embedded
