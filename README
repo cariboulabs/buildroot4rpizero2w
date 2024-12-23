@@ -8,8 +8,13 @@ make linux-xconfig #or make linux-menuconfig
 # copy generated output/build/linux-XYZ/.config to desired location
 
 make raspberrypizero2w_defconfig
+make menuconfig #if you want to make changes (like the linux kernel location)
 make -j10 V=1 #this can take sometime
+
+#note: there is also make busybox-menuconfig to configure busybox
 ```
+
+## 
 
 scripts that should be ran at startup:
 
@@ -17,6 +22,26 @@ scripts that should be ran at startup:
 
 the S99 is a naming convetion with which the kernel decides the order of tasks
 
+##
+
+after runing make, all outputs will be inside an `output` directory. Insert an sd card and ensure its mounted on sda
+
+```
+lsblk
+```
+
+burn it
+
+```
+sudo umount /dev/sda*
+sudo dd if=output/images/sdcard.img of=/dev/sda bs=4M status=progress
+sync
+sudo eject /dev/sda
+```
+
+insert to rpi and you are ready to go
+
+##
 
 sources:
 
@@ -27,6 +52,8 @@ sources:
 * https://github.com/IronOxidizer/instant-pi
 
 * https://kittenlabs.de/blog/2024/09/01/extreme-pi-boot-optimization/
+
+* https://raspberrypi.stackexchange.com/questions/41568/how-to-connect-and-use-ssh-without-a-screen-using-buildroot
 
 #
 Buildroot is a simple, efficient and easy-to-use tool to generate embedded
